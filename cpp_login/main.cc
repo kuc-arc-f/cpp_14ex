@@ -16,17 +16,6 @@ int main() {
             callback(resp);
         }, {Get});    
     app().registerHandler(
-        "/test", [](const HttpRequestPtr &request,  std::function<void(const HttpResponsePtr &)> &&callback) {
-            auto resp = HttpResponse::newHttpResponse();
-
-            Cookie cookie("cpp_login_1", "1");
-            cookie.setPath("/");
-            cookie.setMaxAge(3600 * 24 * 30);  // 1H * 24 * N day
-            cookie.setHttpOnly(false);
-            resp->addCookie(cookie);
-            callback(resp);
-        }, {Get}); 
-    app().registerHandler(
         "/login", [](const HttpRequestPtr &request,  std::function<void(const HttpResponsePtr &)> &&callback) {
             std::string htm = ssr_htm_login();
             auto resp = HttpResponse::newHttpResponse();
