@@ -6,6 +6,8 @@
 using namespace drogon;
 
 int main() {
+    // config.json を読み込む(リスンポート、DB接続情報など)
+    drogon::app().loadConfigFile("config.json");    
     //Set HTTP listener address and port
     drogon::app().addListener("0.0.0.0", 5555);
 
@@ -17,31 +19,7 @@ int main() {
             resp->setBody(htm);
             callback(resp);
         }, {Get});
-    app().registerHandler(
-        "/api/todo/list", [](const HttpRequestPtr &request,  std::function<void(const HttpResponsePtr &)> &&callback) {
-            TodoWrap tLib("");
-            auto items = tLib.todo_list();
-            auto resp = HttpResponse::newHttpResponse();
-            resp->setBody(items);
-            callback(resp);
-        }, {Get});
-    app().registerHandler(
-        "/api/todo/create", [](const HttpRequestPtr &request,  std::function<void(const HttpResponsePtr &)> &&callback) {
-            TodoWrap tw("");
-            auto res1 = tw.todo_create(request);
-            auto resp = HttpResponse::newHttpResponse();
-            resp->setBody(res1);
-            callback(resp);            
-        }, {Post});      
-    app().registerHandler(
-        "/api/todo/delete", [](const HttpRequestPtr &request,  std::function<void(const HttpResponsePtr &)> &&callback) {
-            TodoWrap tw("");
-            tw.todo_delete_handler(request);
-            auto resp = HttpResponse::newHttpResponse();
-            resp->setBody("OK");
-            callback(resp);            
-        }, {Post});
-
+        
     //Load config file
     //drogon::app().loadConfigFile("../config.json");
     //drogon::app().loadConfigFile("../config.yaml");

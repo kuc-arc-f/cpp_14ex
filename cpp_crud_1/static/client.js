@@ -250,6 +250,7 @@
 
             // 返ってきたJSONデータを解析
             const result = await response.text();
+            console.log("result=", result)
             return result;
         } catch (error) {
             console.error('エラーが発生しました:', error);
