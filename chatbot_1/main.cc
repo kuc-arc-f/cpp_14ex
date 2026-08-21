@@ -5,8 +5,8 @@
 using namespace drogon;
 
 int main() {
-    //Set HTTP listener address and port
-    drogon::app().addListener("0.0.0.0", 5555);
+    // config.json を読み込む(リスンポート、DB接続情報など)
+    drogon::app().loadConfigFile("config.json");    
 
     app().registerHandler(
         "/", [](const HttpRequestPtr &request,  std::function<void(const HttpResponsePtr &)> &&callback) {
@@ -15,6 +15,7 @@ int main() {
             resp->setBody(htm);
             callback(resp);
         }, {Get});
+    /*
     app().registerHandler(
         "/api/chat/send", [](const HttpRequestPtr &request,  std::function<void(const HttpResponsePtr &)> &&callback) {
             auto json = request->getJsonObject();
@@ -30,12 +31,14 @@ int main() {
             resp->setBody(res2);
             callback(resp);
         }, {Post});   
+    */
 
     //Load config file
     //drogon::app().loadConfigFile("../config.json");
     //drogon::app().loadConfigFile("../config.yaml");
     //Run HTTP framework,the method will block in the internal event loop
     drogon::app().setDocumentRoot("./static");
+    LOG_INFO << "Server starting on 0.0.0.0:8080";
     drogon::app().run();
     return 0;
 }

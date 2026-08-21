@@ -1,6 +1,6 @@
 ﻿# cpp_14ex
 
- Version: 0.9.1
+ Version: 0.9.2
 
  date    : 2026/08/19
  
@@ -9,5 +9,10 @@
 ***
 
 C++ Linux , example
+
+***
+### version
+
+* V_0_9_1: new
 
 ***
