@@ -49,7 +49,6 @@ make
 ```
 
 * start
-* localhost:5555
 
 ```
 ./build/chatbot_1
