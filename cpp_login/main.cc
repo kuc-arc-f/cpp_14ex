@@ -5,6 +5,9 @@
 using namespace drogon;
 
 int main() {
+    // config.json を読み込む(リスンポート、DB接続情報など)
+    drogon::app().loadConfigFile("config.json");
+        
     //Set HTTP listener address and port
     drogon::app().addListener("0.0.0.0", 5555);
 
@@ -22,6 +25,7 @@ int main() {
             resp->setBody(htm);
             callback(resp);
         }, {Get});    
+    /*
     app().registerHandler(
         "/api/user/login", [](const HttpRequestPtr &request,  std::function<void(const HttpResponsePtr &)> &&callback) {
             std::string htm = ssr_htm_login();
@@ -35,7 +39,7 @@ int main() {
             if(ret1 > 0){
                 Cookie cookie("cpp_login_1", "1");
                 cookie.setPath("/");
-                cookie.setMaxAge(3600 * 24 * 30);  // 1H * 24 * N day
+                cookie.setMaxAge(3600 * 24 * 30);
                 cookie.setHttpOnly(false);
                 resp->addCookie(cookie);
                 body_str = R"(<div><input type="text" id="result_login" value="1" /></div>)";
@@ -43,6 +47,7 @@ int main() {
             resp->setBody(body_str);
             callback(resp);
         }, {Post});
+    */
 
     //Load config file
     //drogon::app().loadConfigFile("../config.json");
